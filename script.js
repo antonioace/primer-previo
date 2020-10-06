@@ -1,19 +1,33 @@
-let body = $("#cargar-apuestas");
+window.onload = function(event) {
+    //funciones a ejecutar
+    console.log("es valido.");
+   
+    this.cargar();
+  };
 
-let r = $.get('https://www.datos.gov.co/resource/8my7-2hnt.json', function (data) {
 
-    for (let dato of data) {
 
-        let tr = $("<tr>");
 
-        tr.append($("<td>", {text: dato.direccion_web}));
-        tr.append($("<td>", {text: dato.nit}));
-        tr.append($("<td>", {text: dato.operador}));
-        tr.append($("<td>").append($("<a>", {text: 'Ir', href: 'http://'+dato.direccion_web, target: '_blank'})));
+function cargar() {
+    
 
-        body.append(tr);
+    let datos = JSON.parse(localStorage.getItem('https://www.datos.gov.co/resource/gt2j-8ykr.json'));
+ let tableC=document.querySelector("#cargar-tabla");
+ tableC.innerHTML="";
+        
+        let aux = "";
+        for (let elemento in datos) {
+            let prueba = datos[elemento];
+            aux += "<tr>";
+           
+            for (let item in prueba) {
+                
+                    aux += "<td>" + prueba[item] + "</td>";
+                
+              
+            }
+            aux += "</tr>";
+    
+        }
+       tableC.innerHTML=aux;
     }
-
-});
-
-}
